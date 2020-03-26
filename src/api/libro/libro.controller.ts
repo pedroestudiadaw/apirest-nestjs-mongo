@@ -5,18 +5,18 @@ import { LibroDto} from '../clases-dto/libro-dto';
 export class LibroController {
 
   @Get()
-  verLibreria(): string{
-    return "ver libreria";
+  verLibreria(): LibroDto[] {
+    return LibroDto[0];
   }
 
   @Get('/:id')
-  verLibroPorId(@Param('id') id): string{
-    return "ver libro: " + id;
+  verLibroPorId(@Param('id') id): LibroDto[]{
+    return LibroDto[id];
   }
 
   @Post()
   addLibro(@Body() respuesta: LibroDto): string{
-    return "añadir libro: " + respuesta.id;
+    return respuesta.id;
   }
 
   @Put('/:id')
