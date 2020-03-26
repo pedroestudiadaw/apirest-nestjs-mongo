@@ -1,12 +1,20 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { LibroDto} from '../clases-dto/libro-dto';
+import { RestService} from '../rest/rest.service';
 
 @Controller('api/libro')
 export class LibroController {
 
+  //Creador del constructor para la conectar el servicio
+  private libros: LibroDto[] = []
+  constructor(private readonly restService: RestService) {
+    this.libros = this.restService.getLibrosDtos();
+  }
+
+  //Rutas
   @Get()
   verLibreria(): LibroDto[] {
-    return LibroDto[0];
+    return this.restService.getLibrosDtos();
   }
 
   @Get('/:id')
@@ -15,8 +23,9 @@ export class LibroController {
   }
 
   @Post()
-  addLibro(@Body() respuesta: LibroDto): string{
-    return respuesta.id;
+  addLibro(@Body() respuesta: LibroDto): LibroDto{
+    this.restService.addLibro(respuesta);
+    return respuesta;
   }
 
   @Put('/:id')
