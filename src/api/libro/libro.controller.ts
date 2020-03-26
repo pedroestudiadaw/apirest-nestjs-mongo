@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { LibroDto} from '../clases-dto/libro-dto';
 
 @Controller('api/libro')
@@ -8,22 +8,27 @@ export class LibroController {
   verLibreria(): string{
     return "ver libreria";
   }
+
   @Get('/:id')
   verLibroPorId(@Param('id') id): string{
     return "ver libro: " + id;
   }
+
   @Post()
-  addLibro(): string{
-    return "añadir libro";
+  addLibro(@Body() respuesta: LibroDto): string{
+    return "añadir libro: " + respuesta.id;
   }
+
   @Put()
-  editarLibro(): string{
-    return "editar libro";
+  editarLibro(@Body() respuesta: LibroDto): string {
+    return "editar libro: " + respuesta.id;
   }
+
   @Delete()
   eliminarLibreria(): string{
     return "Eliminar libreria";
   }
+
   @Delete('/:id')
   eliminarLibro(@Param('id') id): string{
     return  "Eliminado libro: " + id;
