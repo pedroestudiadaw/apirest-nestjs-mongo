@@ -19,9 +19,9 @@ export class LibroController {
     return "añadir libro: " + respuesta.id;
   }
 
-  @Put()
-  editarLibro(@Body() respuesta: LibroDto): string {
-    return "editar libro: " + respuesta.id;
+  @Put('/:id')
+  editarLibro(@Body() respuesta: LibroDto, @Param('id') idLibro): string {
+    return "editar libro: " + respuesta.id + " - número libro: " + idLibro;
   }
 
   @Delete()
