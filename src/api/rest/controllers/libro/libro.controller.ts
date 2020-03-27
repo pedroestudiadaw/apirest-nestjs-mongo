@@ -1,20 +1,30 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { LibroDto} from '../clases-dto/libro-dto';
-import { RestService} from '../rest/rest.service';
+import { LibroDto} from '../../interfaces/clases-dto/libro-dto';
+import { RestService} from '../../services/rest.service';
+import { LibroBd} from '../../interfaces/libro-bd';
 
-@Controller('api/libro')
+@Controller('api/rest/libro')
 export class LibroController {
-
-  //Creador del constructor para la conectar el servicio
-  private libros: LibroDto[] = []
+/*
+  //Creador del constructor para la conectar el servicio sin BD
+  private libros: LibroDto[] = [];
   constructor(private readonly restService: RestService) {
     this.libros = this.restService.getLibrosDtos();
   }
-
+*/
+  //constructor para conectar el servicio con BD
+  constructor(private restService: RestService) { }
+/*
   //Rutas
+  //GET sin llamada BS - básico
   @Get()
   verLibreria(): LibroDto[] {
     return this.restService.getLibrosDtos();
+  }
+   */
+  @Get()
+  async findAll(): Promise<LibroDto[]>{
+    return await this.restService.findAll();
   }
 
   @Get('/:id')
