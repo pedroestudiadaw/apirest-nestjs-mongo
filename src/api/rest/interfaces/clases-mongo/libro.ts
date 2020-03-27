@@ -1,9 +1,8 @@
 import { IsString} from 'class-validator';
 
-export class LibroBd {
+export class Libro {
 
-  @IsString()
-  id: string;
+  _id: string;
 
   @IsString()
   titulo: string;

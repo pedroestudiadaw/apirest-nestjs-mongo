@@ -1,6 +1,6 @@
 import { Libro } from './libro';
 
-describe('Libro', () => {
+describe('LibroBd', () => {
   it('should be defined', () => {
     expect(new Libro()).toBeDefined();
   });
